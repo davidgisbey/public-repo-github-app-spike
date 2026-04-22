@@ -1,0 +1,35 @@
+name: 'Setup UV with App Token'
+description: 'Generates an app token and syncs dependencies with uv'
+inputs:
+  app-id:
+    description: 'GitHub App ID'
+    required: true
+  private-key:
+    description: 'GitHub App Private Key'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate GitHub App Token
+      id: generate_token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: ${{ inputs.app-id }}
+        private-key: ${{ inputs.private-key }}
+        owner: ${{ github.repository_owner }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      shell: bash
+      run: uv sync
+      env:
+        GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        UV_HTTP_BASIC_GITHUB_COM: "x-access-token:${{ steps.generate_token.outputs.token }}"

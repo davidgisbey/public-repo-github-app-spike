@@ -1,3 +1,6 @@
+from private_repo_github_app_spike import Prompt
+
+
 class Greeter:
-    def greet(self, name: str) -> str:
-        return f"Hello, {name}!"
+    def prompt(self) -> str:
+        return f"Hello, this is the {Prompt().system_prompt()}!"
