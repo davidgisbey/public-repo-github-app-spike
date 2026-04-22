@@ -9,6 +9,7 @@ dev = [
   "pytest>=8.0.0",
   "ruff>=0.11.0",
   "pyright>=1.1.0",
+  "private-repo-github-app-spike",
 ]
 
 [tool.pytest.ini_options]
@@ -21,3 +22,7 @@ venv = ".venv"
 
 [tool.ruff]
 line-length = 88
+
+
+[tool.uv.sources]
+private-repo-github-app-spike = { git = "https://github.com/davidgisbey/private-repo-github-app-spike" }
