@@ -32,4 +32,3 @@ runs:
       run: uv sync
       env:
         GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-        UV_HTTP_BASIC_GITHUB_COM: "x-access-token:${{ steps.generate_token.outputs.token }}"
