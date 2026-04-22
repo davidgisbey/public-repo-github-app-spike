@@ -19,6 +19,11 @@ runs:
         private-key: ${{ inputs.private-key }}
         owner: ${{ github.repository_owner }}
 
+    - name: Configure Git to use token
+      shell: bash
+      run: |
+        git config --global url."https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/".insteadOf "https://github.com/"
+
     - name: Install uv
       uses: astral-sh/setup-uv@v6
 
@@ -30,6 +35,3 @@ runs:
     - name: Install dependencies
       shell: bash
       run: uv sync
-      env:
-        GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-        UV_HTTP_BASIC_GITHUB_COM: "x-access-token:${{ steps.generate_token.outputs.token }}"
