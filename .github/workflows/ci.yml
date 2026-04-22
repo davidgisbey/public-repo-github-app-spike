@@ -10,76 +10,54 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Action Files
         uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: .//.github/actions/setup-python-uv-env
         with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Run tests
         run: uv run pytest
+
   format:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Action Files
         uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: .//.github/actions/setup-python-uv-env
         with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Check formatting
         run: uv run ruff format --check .
+
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Action Files
         uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: .//.github/actions/setup-python-uv-env
         with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Lint
         run: uv run ruff check .
+
   type_checks:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Action Files
         uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: .//.github/actions/setup-python-uv-env
         with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Type check
         run: uv run pyright
