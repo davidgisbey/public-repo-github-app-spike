@@ -73,7 +73,7 @@ wheels = [
 [[package]]
 name = "private-repo-github-app-spike"
 version = "0.1.0"
-source = { git = "https://github.com/davidgisbey/private-repo-github-app-spike#91524bbaaf562829b3d92b991e2001366834cd0b" }
+source = { git = "https://github.com/davidgisbey/private-repo-github-app-spike#74c96444fd24636dbf250cd513d0d897a50136e5" }
 
 [[package]]
 name = "pygments"
